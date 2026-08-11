@@ -35,19 +35,33 @@ Robot 담당: (김병준, 이상진) - OpenMANIPULATOR-X 관절 제어, 가위�
 3.1 노드 및 데이터 흐름 (Node Graph)
 
 USB Camera / Gazebo Camera
+
         ↓ (/camera/image_raw)
+
 Vision Node (OpenCV / YOLO)
+  
   ├─ 가위/바위/보 클래스 검출 (YOLO Detection/Segmentation)
+  
   └─ 얼굴/손 이동 방향 검출 (HSV / Contour / YOLO)
+  
         ↓ (/game/user_gesture, /game/detection_result)
+
 Decision Node (Game State Machine)
+
   ├─ 게임 카운트다운 및 승패 판정 로직
+  
   └─ 게임 진행 상태 및 스코어 관리
+  
         ↓ (/robot/command_pose, FollowJointTrajectory Action)
+
 Robot Control Node (OpenMANIPULATOR-X)
+
   ├─ 사전 정의된 미니게임 동작 (카운트다운 쉐이킹, 가위/바위/보 출력 Pose)
+  
   └─ 승패 반응 액션 (승리 세레머니, 패배 동작, 그리퍼 제어)
+  
         ↓
+
 OpenCV Result Window / RViz2 / Console Log (실시간 점수 및 게임 상태 표시)
 
 4. 미니게임 시나리오 및 상태 머신 (State Machine)
