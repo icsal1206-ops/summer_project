@@ -3,9 +3,9 @@ import time
 from base_game import BaseGame
 
 
-class RPSGame(BaseGame):
+class CCCGame(BaseGame):
     def __init__(self, robot_controller):
-        super().__init__("Rock Paper Scissors Game")
+        super().__init__("CCC Game")
         self.robot = robot_controller
         self.state = "READY"
         self.start_time = 0
@@ -16,21 +16,19 @@ class RPSGame(BaseGame):
         self.scores = {"user": 0, "robot": 0}
 
     def start(self):
-        """'s' 키 입력 시 게임 시작"""
         self.state = "COUNTDOWN"
         self.start_time = time.time()
-        self.robot_choice = random.choice(["ROCK", "PAPER", "SCISSORS"])
+        self.robot_choice = random.choice(["LEFT", "RIGHT"])
         self.robot.move_to_pose("READY")
 
     def reset(self):
-        """'r' 키 입력 시 초기화"""
         self.state = "READY"
         self.result_text = ""
         self.robot.move_to_pose("HOME")
 
     def update(self, frame, gesture, key):
         elapsed = time.time() - self.start_time
-        status_text = ""
+        status_text = ""  # UnboundLocalError 방지용 기본값 지정
 
         if self.state == "READY":
             status_text = f"Press 'S' to Start! | User: {self.scores['user']} Robot: {self.scores['robot']}"
@@ -38,25 +36,19 @@ class RPSGame(BaseGame):
         elif self.state == "COUNTDOWN":
             remaining = self.countdown_sec - int(elapsed)
             if remaining > 0:
-                status_text = f"Rock... Paper... Scissors! ({remaining})"
+                status_text = f"Cham... Cham... Cham! ({remaining})"
             else:
                 self.state = "RESULT"
-                self.user_choice = gesture if gesture in ["ROCK", "PAPER", "SCISSORS"] else "UNKNOWN"
+                self.user_choice = gesture if gesture in ["LEFT", "RIGHT"] else "CENTER"
                 
-                # 로봇 동작 제어
                 self.robot.move_to_pose(self.robot_choice)
 
-                # 승패 판정
                 if self.user_choice == self.robot_choice:
-                    self.result_text = f"DRAW! (User:{self.user_choice} vs Bot:{self.robot_choice})"
-                elif (self.user_choice == "ROCK" and self.robot_choice == "SCISSORS") or \
-                     (self.user_choice == "PAPER" and self.robot_choice == "ROCK") or \
-                     (self.user_choice == "SCISSORS" and self.robot_choice == "PAPER"):
-                    self.result_text = f"USER WINS! (User:{self.user_choice} vs Bot:{self.robot_choice})"
-                    self.scores["user"] += 1
-                else:
-                    self.result_text = f"ROBOT WINS! (User:{self.user_choice} vs Bot:{self.robot_choice})"
+                    self.result_text = f"HIT! Robot Wins! (User:{self.user_choice} vs Bot:{self.robot_choice})"
                     self.scores["robot"] += 1
+                else:
+                    self.result_text = f"SAFE! User Wins! (User:{self.user_choice} vs Bot:{self.robot_choice})"
+                    self.scores["user"] += 1
 
                 status_text = f"{self.result_text} | User: {self.scores['user']} Robot: {self.scores['robot']}"
                 self.start_time = time.time()
