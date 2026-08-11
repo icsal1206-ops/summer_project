@@ -16,6 +16,8 @@ YOLO/OpenCV를 통해 사용자의 손 모양(가위/바위/보) 및 참참참 �
 
 주 검증 환경: [ ] Gazebo Harmonics / [ ] 실제 OpenMANIPULATOR-X (택 1)
 
+
+
 2. 조원 및 역할
 
 Vision 담당: (김동호, 이상진) - 카메라 입력 수신, YOLO/OpenCV 기반 사용자 손 동작 및 얼굴/시선 방향 인식 모델 구현
@@ -27,9 +29,11 @@ Robot 담당: (김병준, 이상진) - OpenMANIPULATOR-X 관절 제어, 가위�
 검증·문서 담당: (김동호) - 게임 규칙 시나리오 테스트, 에러 상태 검증, 시연 영상 편집, README 및 프로젝트 기술서 작성
 
 
+
 3. 시스템 구성안
 
 3.1 노드 및 데이터 흐름 (Node Graph)
+
 USB Camera / Gazebo Camera
         ↓ (/camera/image_raw)
 Vision Node (OpenCV / YOLO)
@@ -46,11 +50,13 @@ Robot Control Node (OpenMANIPULATOR-X)
         ↓
 OpenCV Result Window / RViz2 / Console Log (실시간 점수 및 게임 상태 표시)
 
-5. 미니게임 시나리오 및 상태 머신 (State Machine)
+4. 미니게임 시나리오 및 상태 머신 (State Machine)
+
 4.1 구현 게임 종류
 가위바위보: 로봇이 카운트다운 동작 후 랜덤/인공지능으로 손 모양(Pose)을 제시하고, 카운트 시점의 사용자 손 모양(YOLO)을 인식하여 승패 판정 및 승리 세레머니 수행
 
 참참참: 로봇이 지시봉/손끝을 특정 방향(좌/우)으로 가리킬 때, 사용자의 고개/손 방향을 인식하여 승/패 판단
+
 
 5. 모니터링 및 상태 확인 방식
 [x] OpenCV Result Window: 카메라 영상 위에 실시간 게임 상태(카운트다운, 승/패/무, 현재 스코어, YOLO Bounding Box) 표시
