@@ -10,7 +10,7 @@ YOLO/OpenCV를 통해 사용자의 손 모양(가위/바위/보) 및 참참참 �
 
 게임 상태 머신(Decision Node)을 구축하여 카운트다운, 승패 판정, 결과 동작 명령 처리
 
-로봇 팔의 관절 제어(JointTrajectory / MoveIt Pose)를 통해 승패에 따른 액션(세레머니, 아쉬운 동작, 뿅망치 타격 등) 수행
+로봇 팔의 관절 제어(JointTrajectory / MoveIt Pose)를 통해 승패에 따른 액션(세레머니, 아쉬운 동작 등) 수행
 
 주 검증 환경: [ ] Gazebo Harmonics / [ ] 실제 OpenMANIPULATOR-X (택 1)
 
@@ -71,11 +71,11 @@ OpenCV Result Window / RViz2 / Console Log (실시간 점수 및 게임 상태 �
 
 
 5. 모니터링 및 상태 확인 방식
-[x] OpenCV Result Window: 카메라 영상 위에 실시간 게임 상태(카운트다운, 승/패/무, 현재 스코어, YOLO Bounding Box) 표시
+[1] OpenCV Result Window: 카메라 영상 위에 실시간 게임 상태(카운트다운, 승/패/무, 현재 스코어, YOLO Bounding Box) 표시
 
-[x] Console Log / RQt: ROS 2 Node 상태 및 Action 진행 상황 출력
+[2] Console Log / RQt: ROS 2 Node 상태 및 Action 진행 상황 출력
 
-[x] RViz2: 로봇의 현재 관절 상태 및 TF2 좌표 모니터링
+[3] RViz2: 로봇의 현재 관절 상태 및 TF2 좌표 모니터링
 
 
 
