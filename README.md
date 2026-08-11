@@ -1,5 +1,5 @@
 계획서
-manipulator와 openCV를 활용한 로봇 팔과 대결하는 다양한 미니게임 만들기
+manipulator와 openCV, yolo를 활용한 로봇 팔과 대결하는 다양한 미니게임 만들기
 ex)가위바위보, 참참참 등
 
 2026-08-10
